@@ -226,27 +226,9 @@ python-dotenv==1.0.1
 
 ---
 
-## Interview Questions This Project Covers
-
-- What is RAG and why is it better than sending the full document to the LLM?
-- Why chunk documents before embedding? What is chunk overlap?
-- What is cosine similarity and why use it for text embeddings?
-- What is mean pooling and why do sentence embedding models use it?
-- What is HNSW and how does ChromaDB use it for fast retrieval?
-- How do you prevent LLM hallucination in bias detection?
-- Why use temperature 0.1 for structured JSON outputs?
-- What is the singleton pattern and where did you use it?
-- How does the two-call rewrite solve the token truncation problem?
-- How does Langfuse observability work and what does it track?
-
----
-
 ## Built By
 
 **Fatima Firdouse** — B.Tech Artificial Intelligence & Data Science  
 📧 fatimafirdouse011@gmail.com  
 🔗 [LinkedIn](https://linkedin.com/in/fatima-firdouse) · [GitHub](https://github.com/fatima-firdouse)
 
----
-
-*Built in 3 days as a production-grade portfolio project demonstrating RAG pipeline architecture, LLM reasoning, prompt engineering, and full-stack AI deployment on AWS.*
