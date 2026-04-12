@@ -244,9 +244,6 @@ python-dotenv==1.0.1
 ## Built By
 
 **Fatima Firdouse** — B.Tech Artificial Intelligence & Data Science  
-Dr. VRK Women's College of Engineering & Technology, Hyderabad  
-Graduating June 2026
-
 📧 fatimafirdouse011@gmail.com  
 🔗 [LinkedIn](https://linkedin.com/in/fatima-firdouse) · [GitHub](https://github.com/fatima-firdouse)
 
