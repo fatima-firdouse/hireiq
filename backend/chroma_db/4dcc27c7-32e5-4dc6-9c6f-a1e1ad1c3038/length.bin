@@ -1,0 +1,6 @@
+is captured on a live dashboard — zero blind spots.
+• Took the system from local prototype to live public URL on AWS EC2, handling real document queries at
+sub-second speed.
+Resume Analyzer — Intelligent Screening System | Live Jan 2026
+• Replaced manual resume screening with an automated NLP engine — TF-IDF + cosine similarity ranks every
+candidate against a job description in under a s
