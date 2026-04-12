@@ -3,6 +3,9 @@ import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
 from components.styles import HOME_CSS, generate_stars_html
 
+API_URL = "http://13.49.78.118:8000"   
+
+
 st.set_page_config(
     page_title="HireIQ — Hire smarter. Hire fair.",
     page_icon="🧠",
