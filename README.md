@@ -2,9 +2,6 @@
 
 > Production-grade AI system for smarter, fairer hiring decisions.
 
-🔗 **Live Demo:** [hireiq-ai.streamlit.app](https://hireiq-ai.streamlit.app)  
-🔧 **Backend API:** Deployed on AWS EC2  
-📦 **Architecture:** RAG Pipeline + LLM Reasoning + Vector Search
 
 ---
 
@@ -22,6 +19,12 @@ Paste any job description to get:
 - **Bias Detection** — context-aware, not keyword-based
 - **JD Quality Analysis** — vague terms, missing info, requirement inflation score
 - **AI Rewrite** — bias-free, inclusive, improved version with placeholders
+
+---
+
+🔗 **Live Demo:** [hireiq-ai.streamlit.app](https://hireiq-ai.streamlit.app)  
+🔧 **Backend API:** Deployed on AWS EC2  
+📦 **Architecture:** RAG Pipeline + LLM Reasoning + Vector Search
 
 ---
 
