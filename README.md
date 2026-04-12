@@ -3,8 +3,6 @@
 > Production-grade AI system for smarter, fairer hiring decisions.
 
 
----
-
 ## What It Does
 
 ### 🎯 Candidate Flow
