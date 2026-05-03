@@ -5,6 +5,13 @@
 
 ## What It Does
 
+### 🏢 Recruiter Flow
+Paste any job description to get:
+- **Bias Detection** — context-aware, not keyword-based
+- **JD Quality Analysis** — vague terms, missing info, requirement inflation score
+- **AI Rewrite** — bias-free, inclusive, improved version with placeholders
+
+
 ### 🎯 Candidate Flow
 Upload your resume (PDF/DOCX) and paste any job description to get:
 - **Match Score** (0–100) — how well your resume fits the role
@@ -12,11 +19,6 @@ Upload your resume (PDF/DOCX) and paste any job description to get:
 - **Resume Improvement Suggestions** — specific, actionable fixes
 - **STAR Interview Prep** — questions generated from your actual gaps
 
-### 🏢 Recruiter Flow
-Paste any job description to get:
-- **Bias Detection** — context-aware, not keyword-based
-- **JD Quality Analysis** — vague terms, missing info, requirement inflation score
-- **AI Rewrite** — bias-free, inclusive, improved version with placeholders
 
 ---
 
