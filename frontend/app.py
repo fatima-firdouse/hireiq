@@ -3,7 +3,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
 from components.styles import HOME_CSS, generate_stars_html
 
-API_URL = "https://hireiq-backend-s4tk.onrender.com"
+API_URL = "https://hireiq-backend-6noy.onrender.com"
 
 
 st.set_page_config(

@@ -43,6 +43,8 @@ async def upload_resume(file: UploadFile = File(...)):
         collection_name = ingest_document(tmp_path)
     except (ValueError, RuntimeError) as e:
         raise HTTPException(422, str(e))
+    except Exception as e:
+        raise HTTPException(500, f"Resume ingestion failed: {str(e)}")
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
