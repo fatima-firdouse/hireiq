@@ -20,6 +20,8 @@ def call_llm(
     system_prompt: str,
     user_prompt: str,
     temperature: float = 0.2,
+    max_tokens: int = 4096,
+    response_format: dict = None,
     trace_name: str = "llm_call",
     metadata: dict = None
 ) -> str:
@@ -31,15 +33,19 @@ def call_llm(
     start_time = time.time()
 
     try:
-        response = client.chat.completions.create(
-            model=GROQ_MODEL,
-            temperature=temperature,
-            max_tokens=2048,
-            messages=[
+        kwargs = {
+            "model": GROQ_MODEL,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user",   "content": user_prompt},
             ]
-        )
+        }
+        if response_format:
+            kwargs["response_format"] = response_format
+
+        response = client.chat.completions.create(**kwargs)
         result = response.choices[0].message.content
 
         # Log successful call
@@ -71,6 +77,8 @@ def call_llm_json(
         system_prompt,
         user_prompt,
         temperature=0.1,
+        max_tokens=4096,
+        response_format={"type": "json_object"},
         trace_name=trace_name,
         metadata=metadata
     )
@@ -108,7 +116,6 @@ def extract_json(text: str) -> dict:
             pass
 
     # Strategy 4: Attempt to repair truncated JSON
-    # Find the opening brace and try to close it
     first_brace = text.find("{")
     if first_brace != -1:
         partial = text[first_brace:]
@@ -124,30 +131,42 @@ def extract_json(text: str) -> dict:
 def _repair_truncated_json(text: str) -> dict:
     """
     Attempt to repair JSON truncated mid-generation.
-    Closes unclosed strings, arrays, and objects.
+    Uses stack-based bracket/brace tracking so nesting is preserved.
     """
     import json
 
-    # Count open braces and brackets
-    open_braces = text.count("{") - text.count("}")
-    open_brackets = text.count("[") - text.count("]")
+    # If text ends with an unclosed key or value after comma, strip back to last comma
+    last_comma = text.rfind(",")
+    if last_comma != -1:
+        text = text[:last_comma]
 
-    repaired = text.rstrip()
+    stack = []
+    in_str = False
+    esc = False
+    for c in text:
+        if esc:
+            esc = False
+            continue
+        if c == "\\":
+            esc = True
+            continue
+        if c == '"':
+            in_str = not in_str
+            continue
+        if not in_str:
+            if c in "{[":
+                stack.append("}" if c == "{" else "]")
+            elif c in "}]":
+                if stack and stack[-1] == c:
+                    stack.pop()
 
-    # Remove trailing incomplete string or key
-    # Find last complete value (ends with ", or } or ] or a complete string)
-    last_comma = repaired.rfind(",")
-    last_close = max(repaired.rfind("}"), repaired.rfind("]"))
+    if in_str:
+        text += '"'
 
-    if last_comma > last_close:
-        # Truncated after a comma — remove the incomplete entry
-        repaired = repaired[:last_comma]
-
-    # Close open brackets first (inner → outer)
-    repaired += "]" * open_brackets
-    repaired += "}" * open_braces
+    while stack:
+        text += stack.pop()
 
     try:
-        return json.loads(repaired)
+        return json.loads(text)
     except json.JSONDecodeError:
         return None
