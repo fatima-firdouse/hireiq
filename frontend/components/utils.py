@@ -1,12 +1,13 @@
 # frontend/components/utils.py
 
+import os
 import requests
 import streamlit as st
 
 try:
-    API_BASE_URL = st.secrets["API_BASE_URL"]
+    API_BASE_URL = st.secrets.get("API_BASE_URL", os.getenv("API_URL", "http://localhost:8000"))
 except Exception:
-    API_BASE_URL = "http://localhost:8000"
+    API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
 
 
 def upload_resume(file) -> dict:

@@ -2,9 +2,13 @@ __pycache__/
 *.pyc
 .env
 .env.*
+!.env.example
+!backend/.env.example
+!frontend/.env.example
 venv/
 .venv/
 node_modules/
 .DS_Store
 *.log
 .chromadb/
+chroma_db/
