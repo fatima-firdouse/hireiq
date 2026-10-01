@@ -78,7 +78,6 @@ def call_llm_json(
         user_prompt,
         temperature=0.1,
         max_tokens=4096,
-        response_format={"type": "json_object"},
         trace_name=trace_name,
         metadata=metadata
     )
