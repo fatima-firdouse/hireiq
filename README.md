@@ -1,39 +1,30 @@
 # HireIQ — AI Hiring Intelligence System
-
-> Production-grade AI system for smarter, fairer hiring decisions.
-
+Production-grade AI system for smarter, fairer hiring decisions.
 
 ## What It Does
 
 ### 🏢 Recruiter Flow
 Paste any job description to get:
-- **Bias Detection** — context-aware, not keyword-based
-- **JD Quality Analysis** — vague terms, missing info, requirement inflation score
-- **AI Rewrite** — bias-free, inclusive, improved version with placeholders
-
+- Bias Detection — context-aware, not keyword-based
+- JD Quality Analysis — vague terms, missing info, requirement inflation score
+- AI Rewrite — bias-free, inclusive, improved version with placeholders
 
 ### 🎯 Candidate Flow
 Upload your resume (PDF/DOCX) and paste any job description to get:
-- **Match Score** (0–100) — how well your resume fits the role
-- **Skill Gap Analysis** — matched vs missing skills from the JD
-- **Resume Improvement Suggestions** — specific, actionable fixes
-- **STAR Interview Prep** — questions generated from your actual gaps
+- Match Score (0–100) — how well your resume fits the role
+- Skill Gap Analysis — matched vs missing skills from the JD
+- Resume Improvement Suggestions — specific, actionable fixes
+- STAR Interview Prep — questions generated from your actual gaps
 
-
----
-
-🔗 **Live Demo:** [hireiq-ai.streamlit.app](https://hireiq-ai.streamlit.app)  
-🔧 **Backend API:** Deployed on AWS EC2  
+🔗 **Live Demo:** [hireiq-ai.streamlit.app](https://hireiq-ai.streamlit.app/)
+🔧 **Backend API:** Deployed on Render — `[PASTE RENDER URL HERE]`
 📦 **Architecture:** RAG Pipeline + LLM Reasoning + Vector Search
 
----
-
 ## System Architecture
-
 ```
 Frontend (Streamlit Cloud)
         ↓ HTTP
-Backend (FastAPI on AWS EC2)
+Backend (FastAPI on Render)
         ↓
 RAG Pipeline:
   PDF/DOCX → pdfplumber / python-docx
@@ -48,10 +39,7 @@ LLM Reasoning → Groq API (LLaMA 3.1 8B Instant)
 Langfuse Observability (prompt + response + latency logged per call)
 ```
 
----
-
 ## Tech Stack
-
 | Layer | Technology |
 |---|---|
 | Frontend | Streamlit |
@@ -63,12 +51,9 @@ Langfuse Observability (prompt + response + latency logged per call)
 | Observability | Langfuse |
 | PDF Parsing | pdfplumber |
 | DOCX Parsing | python-docx |
-| Deployment | AWS EC2 (backend) + Streamlit Cloud (frontend) |
-
----
+| Deployment | Render (backend) + Streamlit Cloud (frontend) |
 
 ## Project Structure
-
 ```
 hireiq/
 ├── backend/
@@ -109,10 +94,7 @@ hireiq/
         └── utils.py               # API call helpers
 ```
 
----
-
 ## Key Engineering Decisions
-
 **Multi-query RAG retrieval** — instead of embedding the full JD as one diluted query, we run 3 focused queries (technical skills, experience, education) and merge top results. This improves chunk relevance from ~0.31 to ~0.55+.
 
 **Evidence-based bias detection** — the LLM is instructed with JD START/END markers and told to only report phrases it can copy-paste verbatim from the text. Eliminates hallucinated bias flags.
@@ -125,10 +107,7 @@ hireiq/
 
 **Langfuse tracing** — every LLM call is logged with trace name, prompt, response, latency in ms, and approximate token count. Graceful fallback if Langfuse is unavailable.
 
----
-
 ## API Endpoints
-
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/candidate/upload-resume` | Upload PDF/DOCX → returns `collection_name` |
@@ -138,10 +117,7 @@ hireiq/
 | POST | `/recruiter/rewrite-jd` | JD → bias + quality + rewrite (3 LLM calls) |
 | GET | `/health` | Health check |
 
----
-
 ## Local Setup
-
 ```bash
 # 1. Clone the repo
 git clone https://github.com/fatima-firdouse/hireiq.git
@@ -167,11 +143,8 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
----
-
 ## Environment Variables
-
-```env
+```
 GROQ_API_KEY=gsk_...
 HF_API_KEY=hf_...
 HF_EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
@@ -182,10 +155,7 @@ LANGFUSE_SECRET_KEY=sk-lf-...
 LANGFUSE_HOST=https://cloud.langfuse.com
 ```
 
----
-
 ## Requirements
-
 **backend/requirements.txt**
 ```
 fastapi==0.111.0
@@ -213,24 +183,17 @@ requests==2.32.3
 python-dotenv==1.0.1
 ```
 
----
-
 ## Deployment
-
 | Service | Platform | Notes |
 |---|---|---|
-| Backend | AWS EC2 t2.micro (Ubuntu 22.04) | Port 8000, screen session |
+| Backend | Render (free tier) | FastAPI web service |
 | Frontend | Streamlit Cloud | Auto-deploys on GitHub push |
-| Vector DB | ChromaDB on EC2 disk | Persisted to `./chroma_db` |
+| Vector DB | ChromaDB on Render disk | Not persistent across restarts on free tier |
 | LLM | Groq API | Free tier — 14,400 req/day |
 | Embeddings | HuggingFace Inference API | Free tier |
 | Observability | Langfuse Cloud | Free tier |
 
----
-
 ## Built By
-
-**Fatima Firdouse** — B.Tech Artificial Intelligence & Data Science  
-📧 fatimafirdouse011@gmail.com  
-🔗 [LinkedIn](https://linkedin.com/in/fatima-firdouse) · [GitHub](https://github.com/fatima-firdouse)
-
+Fatima Firdouse — B.Tech Artificial Intelligence & Data Science
+📧 fatimafirdouse011@gmail.com
+🔗 [LinkedIn](https://www.linkedin.com/in/fatimafirdouse/) · [GitHub](https://github.com/fatima-firdouse)
