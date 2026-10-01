@@ -9,7 +9,7 @@ load_dotenv()
 
 # LLM
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_MODEL = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")  # fast, active free tier
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")  # 8000 OTPM limit, 128k context
 
 # Embeddings
 HF_API_KEY = os.getenv("HF_API_KEY")

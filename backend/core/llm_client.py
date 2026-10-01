@@ -34,7 +34,7 @@ def call_llm(
         response = client.chat.completions.create(
             model=GROQ_MODEL,
             temperature=temperature,
-            max_tokens=4096,        # ← ADD THIS LINE
+            max_tokens=2048,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user",   "content": user_prompt},
