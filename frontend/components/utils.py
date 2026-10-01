@@ -5,9 +5,9 @@ import requests
 import streamlit as st
 
 try:
-    API_BASE_URL = st.secrets.get("API_BASE_URL", os.getenv("API_URL", "http://localhost:8000"))
+    API_BASE_URL = st.secrets.get("API_BASE_URL", os.getenv("API_URL", "https://hireiq-backend-f829.onrender.com"))
 except Exception:
-    API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
+    API_BASE_URL = os.getenv("API_URL", "https://hireiq-backend-f829.onrender.com")
 
 
 def upload_resume(file) -> dict:
